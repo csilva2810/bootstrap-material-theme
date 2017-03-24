@@ -1,0 +1,159 @@
+/*
+ * Cores para o Tema
+ */
+$theme-colors: (
+  "red": (
+    "accent": color("red", "base"),
+    "text-color": #fff
+  ),
+  "pink": (
+    "accent": color("pink", "base"),
+    "text-color": #fff
+  ),
+  "purple": (
+    "accent": color("purple", "base"),
+    "text-color": #fff
+  ),
+  "deep-purple": (
+    "accent": color("deep-purple", "base"),
+    "text-color": #fff
+  ),
+  "indigo": (
+    "accent": color("indigo", "base"),
+    "text-color": #fff
+  ),
+  "blue": (
+    "accent": color("blue", "base"),
+    "text-color": #fff
+  ),
+  "light-blue": (
+    "accent": color("light-blue", "base"),
+    "text-color": #fff
+  ),
+  "cyan": (
+    "accent": color("cyan", "base"),
+    "text-color": #fff
+  ),
+  "teal": (
+    "accent": color("teal", "base"),
+    "text-color": #fff
+  ),
+  "green": (
+    "accent": color("green", "base"),
+    "text-color": #fff
+  ),
+  "light-green": (
+    "accent": color("light-green", "base"),
+    "text-color": color("grey", "darken-3")
+  ),
+  "lime": (
+    "accent": color("lime", "base"),
+    "text-color": #fff
+  ),
+  "yellow": (
+    "accent": color("yellow", "base"),
+    "text-color": color("grey", "darken-3")
+  ),
+  "amber": (
+    "accent": color("amber", "base"),
+    "text-color": #fff
+  ),
+  "orange": (
+    "accent": color("orange", "base"),
+    "text-color": #fff
+  ),
+  "deep-orange": (
+    "accent": color("deep-orange", "base"),
+    "text-color": #fff
+  ),
+  "brown": (
+    "accent": color("brown", "base"),
+    "text-color": #fff
+  ),
+  "blue-grey": (
+    "accent": color("blue-grey", "base"),
+    "text-color": #fff
+  )
+);
+
+/// Themify mixin
+/// @access private
+/// @author Hugo Giraudel
+/// @param {String} $property - Property to themify
+/// @param {String} $color_type - Key color to use from theme
+/// @param {Map} $themes [$themes] - Map of themes to use - não usamos atualmente
+/// @param {Map} $colors - Map of colors to use
+
+@mixin themify($property, $color_type, $themes: null, $colors: $theme-colors) {
+  // Iterate over the themes
+  // @each $theme, $t in $themes {
+  //   // Create a selector (e.g. .theme-unicorn .media`)
+  //   .#{$theme} & {
+  //     // Output the declaration
+  //     #{$property}: map-get($t, $color_type);
+  //   }
+  // }
+  
+  @each $color-name, $color in $colors {
+    // Create a selector (e.g. .theme-unicorn .media`)
+    
+    // @debug "debug: " + $color-name + " " + $color_type;
+    .theme-color-#{$color-name} & {
+      
+      // se o tipo da variavel for map vamos iterar sobre ela
+      #{$property}: map-get($color, $color_type);
+      // @if type-of($property) == "map" {
+      // } @else {
+      //   #{$property}: map-get($color, $color_type);
+      // }
+    }
+    
+  }
+}
+
+@mixin themify-color($arguments...) {
+  @include themify('color', $arguments...);
+}
+
+@mixin themify-border-color($arguments...) {
+  @include themify('border-color', $arguments...);
+}
+
+@mixin themify-background-color($arguments...) {
+  @include themify('background-color', $arguments...);
+}
+
+@mixin themify-glow($arguments...) {
+  @include themify('box-shadow', $arguments...);
+}
+
+@mixin themify-form-control($color_type, $colors: $theme-colors) {
+  & {
+    outline: 0;
+    border-color: $brand-primary;
+    box-shadow: 0 1px 1px rgba(0,0,0, 0.05), 0 0 0 2px rgba($brand-primary, 0.25);
+  }
+  @each $color-name, $color in $colors {
+    .theme-color-#{$color-name} & {
+      $cur-color: map-get($color, $color_type);
+      border-color: $cur-color;
+      box-shadow: 0 1px 1px rgba(0,0,0, 0.05), 0 0 0 2px rgba($cur-color, 0.25);
+    }
+  }
+}
+
+@mixin themify-table($color_type, $colors: $theme-colors) {
+  & {
+    background-color: $table-primary-bg;
+    border-color: $table-primary-bg;
+    color: $table-primary-text-color;
+  }
+  @each $color-name, $color in $colors {
+    .theme-color-#{$color-name} & {
+      $cur-color: map-get($color, $color_type);
+      color: map-get($color, "text-color");
+      background-color: $cur-color;
+      border-color: $cur-color;
+    }
+  }
+}

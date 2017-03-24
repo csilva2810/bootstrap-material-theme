@@ -1,0 +1,165 @@
+.simple-panel {
+  position: relative;
+  display: block;
+  margin: 10px auto;
+  padding: 0;
+  background: #fff;
+  border: 1px solid transparent;
+  border-top-width: 4px;
+  border-radius: $sp-border-radius;
+  @include z-depth(1);
+  will-change: box-shadow;
+  transition: .2s linear;
+
+  &.simple-panel-primary {
+    border-top-color: $brand-primary;
+    .simple-panel-title {
+      color: $brand-primary;
+    }
+  }
+  &.simple-panel-success {
+    border-top-color: $brand-success;
+    .simple-panel-title {
+      color: $brand-success;
+    }
+  }
+  &.simple-panel-info {
+    border-top-color: $brand-info;
+    .simple-panel-title  {
+      color: $brand-info;
+    }
+  }
+  &.simple-panel-warning {
+    border-top-color: $brand-warning;
+    .simple-panel-title {
+      color: $brand-warning;
+    }
+  }
+  &.simple-panel-danger,
+  &.simple-panel-error {
+    border-top-color: $brand-danger;
+    .simple-panel-title {
+      color: $brand-danger;
+    }
+  }
+  &.simple-panel:hover {
+    @include z-depth(2);
+  }
+  
+  & > .simple-panel-header,
+  & > .simple-panel-heading {
+    position: relative;
+    padding: $sp-paddings;
+
+    .minimize, 
+    .maximize {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      transition: background-color .2s ease;
+    }
+    .minimize:hover, 
+    .maximize:hover {
+      background-color: #eee;
+    }
+    .minimize:after {
+      content: "";
+      display: inline-block;
+      margin-left: 5px;
+      border: solid 6px;
+      border-color: transparent;
+      border-bottom-color: #777;
+    }
+    .maximize:after {
+      content: "";
+      display: inline-block;
+      margin-left: 5px;
+      border: solid 6px;
+      border-color: transparent;
+      border-top-color: #777;
+    }
+    & > .simple-panel-title {
+      display: inline-block;
+      margin: 0;
+      font-weight: normal;
+
+      & > .glyphicon {
+        margin-right: 5px;
+      }
+    }
+
+    & > .simple-panel-tools {
+      position: absolute;
+      top: -22px;
+      right: 12px;
+
+      & > .simple-panel-btn {
+        position: relative;
+        display: inline-block;
+        margin: 0 4px;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background-color: #ddd;
+        color: #555;
+        border: none;
+        outline: none;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
+        transition: .2s ease;
+      }
+      & > .simple-panel-btn:hover,
+      & > .simple-panel-btn:focus {
+        box-shadow: 0 3px 5px 0 rgba(0,0,0,0.3);
+      }
+      & > .simple-panel-btn:active {
+        top: 1px;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
+        transition: 0s;
+      }
+      & > .simple-panel-btn.primary {
+        background-color: $brand-primary;
+        color: white;
+      }
+      & > .simple-panel-btn.success {
+        background-color: $brand-success;
+        color: white;
+      }
+      & > .simple-panel-btn.info {
+        background-color: $brand-info;
+        color: white;
+      }
+      & > .simple-panel-btn.warning {
+        background-color: $brand-warning;
+        color: white;
+      }
+      & > .simple-panel-btn.danger {
+        background-color: $brand-danger;
+        color: white;
+      }
+
+    }
+
+  }
+
+  & > .simple-panel-heading-oc { cursor: pointer; }
+
+  & > .simple-panel-body,
+  & > .simple-panel-content {
+    padding: $sp-paddings;
+    
+    .row {
+      margin-left: 0;
+    }
+  }
+
+  .sub-title {
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+}
